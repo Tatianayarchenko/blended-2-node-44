@@ -1,5 +1,4 @@
-// require("dotenv").config();
+const app = require('./src/app');
+const { PORT } = require('./src/config');
 
-
-
-console.log(process.env.NODE_ENV);
+app.listen(PORT);
