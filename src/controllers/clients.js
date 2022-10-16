@@ -1,9 +1,15 @@
+const services = require('../services/clients');
+
 const getAll = async (req, res) => {
-  throw new Error("");
-  res.sendStatus(250);
+  const clients = await services.getAllService();
+  res.json({ clients });
 };
 const getById = async (req, res) => {
-  res.sendStatus(250);
+  const { id } = req.params;
+  const client = await services.getByIdService(id);
+  client
+    ? res.json({ client })
+    : res.status(404).json({ message: 'Not found' });
 };
 
 const createClient = async (req, res) => {

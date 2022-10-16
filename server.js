@@ -1,4 +1,11 @@
+const mongoose = require('mongoose');
 const app = require('./src/app');
-const { PORT } = require('./src/config');
+const { PORT, DB_HOST } = require('./src/config');
 
-app.listen(PORT);
+mongoose
+  .connect(DB_HOST)
+  .then(() => app.listen(PORT))
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });
