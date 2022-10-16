@@ -1,4 +1,5 @@
 const getAll = async (req, res) => {
+  throw new Error("");
   res.sendStatus(250);
 };
 const getById = async (req, res) => {

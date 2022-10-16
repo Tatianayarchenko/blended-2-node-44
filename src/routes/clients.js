@@ -7,19 +7,20 @@ const {
   updateClient,
   removeClient,
 } = require("../controllers/clients");
+const wrapper = require("../helpers/wrapper");
 
 const router = express.Router();
 
-router.get("/", getAll);
+router.get("/", wrapper(getAll));
 
-router.get("/:id", getById);
+router.get("/:id", wrapper(getById));
 
-router.post("/", createClient);
+router.post("/", wrapper(createClient));
 
-router.patch("/:id/status", updateStatus);
+router.patch("/:id/status", wrapper(updateStatus));
 
-router.put("/:id", updateClient);
+router.put("/:id", wrapper(updateClient));
 
-router.delete("/:id", removeClient);
+router.delete("/:id", wrapper(removeClient));
 
 module.exports = router;
