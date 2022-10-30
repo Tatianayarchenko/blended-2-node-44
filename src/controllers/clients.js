@@ -13,11 +13,19 @@ const getById = async (req, res) => {
 };
 
 const createClient = async (req, res) => {
-  res.sendStatus(250);
+  const client = await services.createClientService(req.body);
+   res.json({
+    client,
+   })
 };
 
 const updateClient = async (req, res) => {
-  res.sendStatus(250);
+  const {id} = req.params;
+  
+  const client = await services.updateClientService(id, req.body)
+  client
+  ? res.json({ client })
+  : res.status(404).json({ message: 'Not found' });
 };
 
 const updateStatus = async (req, res) => {

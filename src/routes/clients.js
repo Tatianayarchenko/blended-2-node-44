@@ -8,18 +8,20 @@ const {
   removeClient,
 } = require("../controllers/clients");
 const wrapper = require("../helpers/wrapper");
+const {schemas} = require("../models/clients");
+const validator = require("../middlewares/validation")
 
 const router = express.Router();
 
 router.get("/", wrapper(getAll));
 
-router.get("/:id", wrapper(getById));
+router.get("/:id", validator.params(schemas.idSchema), wrapper(getById));
 
-router.post("/", wrapper(createClient));
+router.post("/", validator.body(schemas.addClientSchema), wrapper(createClient));
 
 router.patch("/:id/status", wrapper(updateStatus));
 
-router.put("/:id", wrapper(updateClient));
+router.put("/:id", validator.params(schemas.idSchema), validator.body(schemas.updateClientSchema), wrapper(updateClient));
 
 router.delete("/:id", wrapper(removeClient));
 
