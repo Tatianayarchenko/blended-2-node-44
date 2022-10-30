@@ -1,7 +1,15 @@
-const { Client } = require('../models/clients');
+const { Client } = require("../models/clients");
 
-const getAllService = async () => {
-  const result = await Client.find();
+const getAllService = async (filter) => {
+  const filteredArray = filter.split("|");
+  const [, name, , surname, , email] = filteredArray;
+
+  const result = await Client.find({
+    name: { $regex: new RegExp(name, "i") },
+    surname: { $regex: new RegExp(surname, "i") },
+    email: { $regex: new RegExp(email, "i") },
+    // TODO: find another method for realization filter (like match)
+  });
   return result;
 };
 
