@@ -1,5 +1,5 @@
 const { model, Schema } = require('mongoose');
-const Joi = require("joi");
+const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
 const clientSchema = Schema(
@@ -45,15 +45,20 @@ const updateClientSchema = Joi.object({
   status: Joi.boolean(),
 }).min(1);
 
+const updateStatusSchema = Joi.object({
+  status: Joi.boolean().required(),
+});
+
 const schemas = {
   addClientSchema,
   idSchema,
   updateClientSchema,
-}
+  updateStatusSchema,
+};
 
 const Client = model('client', clientSchema);
 
 module.exports = {
   Client,
   schemas,
-}
+};

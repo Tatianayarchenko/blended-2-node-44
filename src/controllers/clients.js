@@ -14,26 +14,34 @@ const getById = async (req, res) => {
 
 const createClient = async (req, res) => {
   const client = await services.createClientService(req.body);
-   res.json({
+  res.json({
     client,
-   })
+  });
 };
 
 const updateClient = async (req, res) => {
-  const {id} = req.params;
-  
-  const client = await services.updateClientService(id, req.body)
+  const { id } = req.params;
+
+  const client = await services.updateClientService(id, req.body);
   client
-  ? res.json({ client })
-  : res.status(404).json({ message: 'Not found' });
+    ? res.json({ client })
+    : res.status(404).json({ message: 'Not found' });
 };
 
 const updateStatus = async (req, res) => {
-  res.sendStatus(250);
+  const { id } = req.params;
+  const client = await services.updateStatusService(id, req.body);
+  client
+    ? res.json({ client })
+    : res.status(404).json({ message: 'Not found' });
 };
 
 const removeClient = async (req, res) => {
-  res.sendStatus(250);
+  const { id } = req.params;
+  const client = await services.removeClientService(id);
+  client
+    ? res.json({ client })
+    : res.status(404).json({ message: 'Not found' });
 };
 
 module.exports = {
